@@ -105,6 +105,24 @@
     display: block;
 }
 
+/* Gaya untuk tombol Logout */
+.dropdown-menu button {
+    background-color: #007bff; /* Biru */
+    color: white; /* Teks berwarna putih */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%; /* Agar tombol memenuhi lebar dropdown */
+    text-align: center; /* Menjaga agar teks tetap terpusat */
+}
+
+/* Efek hover pada tombol Logout */
+.dropdown-menu button:hover {
+    background-color: #0056b3; /* Warna biru yang lebih gelap saat hover */
+}
+
 /* Statistik Box */
 .statistics {
     display: flex;

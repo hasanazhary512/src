@@ -30,22 +30,42 @@ function TampilData({ onLogout }) {  // Menambahkan onLogout sebagai prop
         }
     ]);
 
+    // Menangani ketika tombol Edit diklik
     const handleEdit = (index) => {
-        setEditData(dataPeserta[index]);
+        setEditData({ ...dataPeserta[index] });  // Mengisi form edit dengan data peserta yang dipilih
         setShowEditForm(true);
     };
 
+    // Menangani perubahan input pada form edit
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setEditData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    // Menyimpan perubahan data setelah klik simpan
     const handleSaveEdit = () => {
+        // Update data peserta dengan editData
+        const updatedData = [...dataPeserta];
+        const index = dataPeserta.findIndex(item => item.nomor === editData.nomor);
+        if (index !== -1) {
+            updatedData[index] = editData; // Update data peserta yang dipilih
+            setDataPeserta(updatedData); // Set data baru
+        }
         setShowEditForm(false);
         alert('Data berhasil diperbarui');
     };
 
+    // Menghapus data peserta
     const handleDelete = (index) => {
         const newData = dataPeserta.filter((_, i) => i !== index);
         setDataPeserta(newData);
         alert('Data berhasil dihapus');
     };
 
+    // Menangani ekspor data ke Excel
     const exportToExcel = () => {
         const wb = XLSX.utils.book_new();
         XLSX.utils.sheet_add_aoa(wb, [
@@ -55,6 +75,7 @@ function TampilData({ onLogout }) {  // Menambahkan onLogout sebagai prop
         XLSX.writeFile(wb, 'Data_Peserta_Vokasi.xlsx');
     };
 
+    // Menangani ekspor data ke PDF
     const exportToPDF = () => {
         const doc = new jsPDF();
         doc.text("Data Peserta Vokasi", 20, 10);
@@ -126,9 +147,98 @@ function TampilData({ onLogout }) {  // Menambahkan onLogout sebagai prop
                         <div className="overlay">
                             <div className="edit-form">
                                 <h3>Edit Data Peserta</h3>
-                                <input type="text" value={editData.nama} placeholder="Nama Lengkap" />
-                                <button onClick={handleSaveEdit}>Simpan</button>
-                                <button onClick={() => setShowEditForm(false)}>Batal</button>
+                                <div className="form-group">
+                                    <label htmlFor="nomor">Nomor Register</label>
+                                    <input
+                                        type="text"
+                                        id="nomor"
+                                        name="nomor"
+                                        value={editData.nomor}
+                                        onChange={handleInputChange}
+                                        disabled
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="nama">Nama Lengkap</label>
+                                    <input
+                                        type="text"
+                                        id="nama"
+                                        name="nama"
+                                        value={editData.nama}
+                                        onChange={handleInputChange}
+                                        placeholder="Nama Lengkap"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="alamat">Alamat</label>
+                                    <input
+                                        type="text"
+                                        id="alamat"
+                                        name="alamat"
+                                        value={editData.alamat}
+                                        onChange={handleInputChange}
+                                        placeholder="Alamat"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="jenisKelamin">Jenis Kelamin</label>
+                                    <input
+                                        type="text"
+                                        id="jenisKelamin"
+                                        name="jenisKelamin"
+                                        value={editData.jenisKelamin}
+                                        onChange={handleInputChange}
+                                        placeholder="Jenis Kelamin"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="kategori">Kategori</label>
+                                    <input
+                                        type="text"
+                                        id="kategori"
+                                        name="kategori"
+                                        value={editData.kategori}
+                                        onChange={handleInputChange}
+                                        placeholder="Kategori"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="vokasional">Vokasional</label>
+                                    <input
+                                        type="text"
+                                        id="vokasional"
+                                        name="vokasional"
+                                        value={editData.vokasional}
+                                        onChange={handleInputChange}
+                                        placeholder="Vokasional"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="tanggalMasuk">Tanggal Masuk</label>
+                                    <input
+                                        type="text"
+                                        id="tanggalMasuk"
+                                        name="tanggalMasuk"
+                                        value={editData.tanggalMasuk}
+                                        onChange={handleInputChange}
+                                        placeholder="Tanggal Masuk"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="tanggalSelesai">Tanggal Selesai</label>
+                                    <input
+                                        type="text"
+                                        id="tanggalSelesai"
+                                        name="tanggalSelesai"
+                                        value={editData.tanggalSelesai}
+                                        onChange={handleInputChange}
+                                        placeholder="Tanggal Selesai"
+                                    />
+                                </div>
+                                <div className="form-actions">
+                                    <button className="save-button" onClick={handleSaveEdit}>Simpan</button>
+                                    <button className="cancel-button" onClick={() => setShowEditForm(false)}>Batal</button>
+                                </div>
                             </div>
                         </div>
                     )}

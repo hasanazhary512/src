@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './TampilModul_Instruktur.css'; // Menggunakan CSS dari TampilModul_Instruktur.css
+import './TampilModul_Atasan.css'; // Menggunakan CSS dari TampilModul_Atasan.css
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
 import { Link } from 'react-router-dom';
 
-function TampilModul_Instruktur({ onLogout }) {
+function TampilModul_Atasan({ onLogout }) {
     const [showEditForm, setShowEditForm] = useState(false);
     const [editData, setEditData] = useState({
         namaProgram: '',
@@ -36,12 +36,11 @@ function TampilModul_Instruktur({ onLogout }) {
     };
 
     const handleSaveEdit = () => {
-        // Update data modul dengan editData
         const updatedData = [...dataModul];
         const index = dataModul.findIndex(item => item.judulUnitKode === editData.judulUnitKode);
         if (index !== -1) {
-            updatedData[index] = editData; // Update data
-            setDataModul(updatedData); // Set data baru
+            updatedData[index] = editData;
+            setDataModul(updatedData);
         }
         setShowEditForm(false);
         alert('Data berhasil diperbarui');
@@ -72,7 +71,6 @@ function TampilModul_Instruktur({ onLogout }) {
         doc.save("Data_Modul.pdf");
     };
 
-    // Handle input change for the edit form
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEditData(prevData => ({
@@ -86,14 +84,14 @@ function TampilModul_Instruktur({ onLogout }) {
             <div className="sidebar">
                 <h1>Tampil Modul</h1>
                 <ul>
-                    <li><Link to="/dashboard">Dashboard</Link></li>
-                    <li><Link to="/input">Input Modul</Link></li>
-                    <li><Link to="/tampil-data" className="bold">Tampil Modul</Link></li>
+                    <li><Link to="/Dashboard_Atasan">Dashboard</Link></li>
+                    <li><Link to="/TampilData_Atasan">Tampil Data</Link></li>
+                    <li><Link to="/TampilModul_Atasan" className="bold">Tampil Modul</Link></li>
                 </ul>
             </div>
             <div className="main-content">
                 <div className="navbar">
-                    <span>Instruktur</span>
+                    <span>Atasan</span>
                     <div className="dropdown-menu">
                         <button onClick={onLogout}>Logout</button>
                     </div>
@@ -188,4 +186,4 @@ function TampilModul_Instruktur({ onLogout }) {
     );
 }
 
-export default TampilModul_Instruktur;
+export default TampilModul_Atasan;

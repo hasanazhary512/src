@@ -49,7 +49,7 @@ body {
 
 .main-content {
     flex: 1;
-    margin-left: 300px; /* Pastikan konten tidak tertutup sidebar */
+    margin-left: 300px;
     background-color: #e8eff7;
     padding: 20px;
 }
@@ -103,20 +103,20 @@ form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-left: 0; /* Hilangkan margin kiri form untuk menempel di sebelah kiri */
+    margin-left: 0;
 }
 
 label {
     font-weight: bold;
-    margin-left: 0; /* Hilangkan margin kiri label */
+    margin-left: 0;
 }
 
-input, select {
+input, select, textarea {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-left: 0; /* Hilangkan margin kiri input dan select */
+    margin-left: 0;
 }
 
 button {
@@ -127,7 +127,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 0; /* Hilangkan margin kiri tombol */
+    margin-left: 0;
 }
 
 button:hover {
@@ -140,5 +140,5 @@ button:hover {
     max-height: 200px;
     border: 1px solid #ccc;
     display: block;
-    margin-left: 0; /* Hilangkan margin kiri preview foto */
+    margin-left: 0;
 }

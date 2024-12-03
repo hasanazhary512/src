@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';  // Mengimpor Link dari react-router-dom
+import { Link } from 'react-router-dom';
 import './InputModul_Instruktur.css';
 
-function InputData({ onLogout }) {  // Tambahkan onLogout sebagai props
+function InputData({ onLogout }) {
     const [formData, setFormData] = useState({
         namaProgram: '',
         judulUnitKode: '',
@@ -24,7 +24,7 @@ function InputData({ onLogout }) {  // Tambahkan onLogout sebagai props
             judulUnitKode: '',
             elemenKompetensi: '',
             kriteriaUnjukKerja: '',
-            teoriPraktek: '', // Pastikan Teori dan Praktek dikosongkan setelah submit
+            teoriPraktek: '', 
         });
     };
 
@@ -42,7 +42,6 @@ function InputData({ onLogout }) {  // Tambahkan onLogout sebagai props
                 <div className="navbar">
                     <span>Instruktur</span>
                     <div className="dropdown-menu">
-                        {/* Ganti Link Logout untuk memanggil onLogout */}
                         <button onClick={onLogout} className="link">Logout</button>
                     </div>
                 </div>
@@ -67,8 +66,7 @@ function InputData({ onLogout }) {  // Tambahkan onLogout sebagai props
                             value={formData.teoriPraktek}
                             onChange={handleChange}
                             required
-                            placeholder=""
-                            rows="10" // Menyediakan ruang yang luas untuk penulisan
+                            rows="10"
                             cols="50"
                         ></textarea>
                         

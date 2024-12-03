@@ -8,6 +8,9 @@ import InputData from './InputData';
 import InputModul_Instruktur from './InputModul_Instruktur';
 import TampilData from './TampilData';
 import TampilModul_Instruktur from './TampilModul_Instruktur';
+import Dashboard_Atasan from './Dashboard_Atasan';
+import TampilData_Atasan from './TampilData_Atasan';
+import TampilModul_Atasan from './TampilModul_Atasan';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,6 +25,9 @@ function App() {
         } else if (username === 'instruktur' && password === 'password') {
             setIsAuthenticated(true);
             setUserRole('instruktur');
+        } else if (username === 'atasan' && password === 'password') { // Tambahkan login untuk atasan
+            setIsAuthenticated(true);
+            setUserRole('atasan');
         } else {
             alert('Username atau password salah');
         }
@@ -55,7 +61,7 @@ function App() {
                 <Routes>
                     <Route
                         path="/"
-                        element={isAuthenticated ? <Navigate to={userRole === 'admin' ? "/dashboard" : "/dashboard-instruktur"} replace /> : <Login onLogin={handleLogin} />}
+                        element={isAuthenticated ? <Navigate to={userRole === 'admin' ? "/dashboard" : userRole === 'instruktur' ? "/dashboard-instruktur" : "/dashboard-atasan"} replace /> : <Login onLogin={handleLogin} />}
                     />
                     
                     {/* Rute untuk Admin */}
@@ -90,6 +96,24 @@ function App() {
                             <Route
                                 path="/tampil-modul"
                                 element={<TampilModul_Instruktur onLogout={handleLogout} />}
+                            />
+                        </>
+                    )}
+
+                    {/* Rute untuk Atasan */}
+                    {userRole === 'atasan' && (
+                        <>
+                            <Route
+                                path="/dashboard-atasan"
+                                element={<Dashboard_Atasan onLogout={handleLogout} />}
+                            />
+                            <Route
+                                path="/tampil-data-atasan"
+                                element={<TampilData_Atasan onLogout={handleLogout} />}
+                            />
+                            <Route
+                                path="/tampil-modul-atasan"
+                                element={<TampilModul_Atasan onLogout={handleLogout} />}
                             />
                         </>
                     )}
